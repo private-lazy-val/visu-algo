@@ -2,7 +2,7 @@ import React, {ChangeEvent, useState} from "react";
 import {SolutionLayout} from "../ui/solution-layout/solution-layout";
 import {Input} from "../ui/input/input";
 import {Button} from "../ui/button/button";
-import styles from './string.module.css';
+import styles from '../styles.module.css';
 import {Circle} from "../ui/circle/circle";
 import {reverse} from "./utils/reverse";
 import {ElementStates} from "../../types/element-states";
@@ -37,6 +37,7 @@ export const StringComponent: React.FC = () => {
                     onChange={onChange}/>
                 <Button
                     text="Развернуть"
+                    type="submit"
                     onClick={handleClick}
                     isLoader={loader}
                     disabled={!inputValue}/>
