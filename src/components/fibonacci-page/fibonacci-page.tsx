@@ -5,7 +5,7 @@ import {Input} from "../ui/input/input";
 import {Button} from "../ui/button/button";
 import {Circle} from "../ui/circle/circle";
 import {ElementStates} from "../../types/element-states";
-import {getFibonacciNumbers} from "./utils/get-fib-sequence";
+import {getFibonacciNumbers} from "./utils/get-fibonacci-numbers";
 import {delay} from "../../utils/delay";
 import {SHORT_DELAY_IN_MS} from "../../constants/delays";
 
