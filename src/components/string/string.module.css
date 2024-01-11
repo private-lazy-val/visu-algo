@@ -1,0 +1,12 @@
+.input-wrapper {
+    display: flex;
+    gap: 12px;
+}
+
+.solution-list{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 120px;
+}
