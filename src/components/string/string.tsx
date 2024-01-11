@@ -46,7 +46,9 @@ export const StringComponent: React.FC = () => {
                 <ul className={styles[`solution-list`]}>
                     {charArr.map((char: TArray, index: number) => (
                         <li key={index}>
-                            <Circle letter={char.value} state={char.color}/>
+                            <Circle
+                                letter={char.value}
+                                state={char.color}/>
                         </li>
                     ))}
                 </ul>
