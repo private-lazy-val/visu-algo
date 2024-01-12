@@ -2,7 +2,7 @@ import React, {ChangeEvent, useState} from "react";
 import {SolutionLayout} from "../ui/solution-layout/solution-layout";
 import {Input} from "../ui/input/input";
 import {Button} from "../ui/button/button";
-import styles from '../styles.module.css';
+import styles from './string.module.css';
 import {Circle} from "../ui/circle/circle";
 import {reverse} from "./utils/reverse";
 import {ElementStates} from "../../types/element-states";
@@ -13,7 +13,7 @@ export type TArray = {
 };
 export const StringComponent: React.FC = () => {
     const [inputValue, setInputValue] = useState('');
-    const [charArr, setCharArr] = useState<Array<TArray>>([]);
+    const [arr, setArr] = useState<Array<TArray>>([]);
     const [loader, setLoader] = useState(false);
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +24,7 @@ export const StringComponent: React.FC = () => {
             inputValue.split('').map((value => ({
                 value, color: ElementStates.Default
             })));
-        reverse(newArr, setCharArr, setLoader);
+        reverse(newArr, setArr, setLoader);
     };
 
     return (
@@ -34,18 +34,22 @@ export const StringComponent: React.FC = () => {
                     maxLength={11}
                     isLimitText={true}
                     value={inputValue}
-                    onChange={onChange}/>
+                    onChange={onChange}
+                    extraClass={styles.input}
+                />
                 <Button
                     text="Развернуть"
                     type="submit"
                     onClick={handleClick}
                     isLoader={loader}
-                    disabled={!inputValue}/>
+                    disabled={!inputValue}
+                    extraClass={styles[`submit-btn`]}
+                />
             </div>
 
-            {charArr && (
+            {arr.length > 0 && (
                 <ul className={styles[`solution-list`]}>
-                    {charArr.map((char: TArray, index: number) => (
+                    {arr.map((char: TArray, index: number) => (
                         <li key={index}>
                             <Circle
                                 letter={char.value}

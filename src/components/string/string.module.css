@@ -1,5 +1,6 @@
 .input-wrapper {
     display: flex;
+    justify-content: center;
     gap: 12px;
 }
 
@@ -11,5 +12,19 @@
     column-gap: 16px;
     row-gap: 48px;
     margin-top: 120px;
+    margin-bottom: 0;
     flex-wrap: wrap;
+}
+
+.input {
+    max-width: 377px;
+    width: 100%;
+}
+
+.input input {
+    height: 60px;
+}
+
+.submit-btn {
+    width: 178px;
 }

@@ -3,13 +3,7 @@ import {Dispatch, SetStateAction} from "react";
 import {DELAY_IN_MS} from "../../../constants/delays";
 import {delay} from "../../../utils/delay";
 import {TArray} from "../string";
-
-export const swap = (arr: TArray[], firstIndex: number, secondIndex: number) => {
-    const temp = arr[firstIndex];
-    arr[firstIndex] = arr[secondIndex];
-    arr[secondIndex] = temp;
-    return arr;
-};
+import {swap} from "../../../utils/swap";
 
 export const reverse = async (arr: TArray[],
                         setCharArr: Dispatch<SetStateAction<TArray[]>>,

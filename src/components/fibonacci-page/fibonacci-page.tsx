@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from "react";
 import {SolutionLayout} from "../ui/solution-layout/solution-layout";
-import styles from '../styles.module.css';
+import styles from './fibonacci-page.module.css';
 import {Input} from "../ui/input/input";
 import {Button} from "../ui/button/button";
 import {Circle} from "../ui/circle/circle";
@@ -39,6 +39,7 @@ export const FibonacciPage: React.FC = () => {
                     max={19}
                     value={inputValue}
                     onChange={onChange}
+                    extraClass={styles.input}
                 />
                 <Button
                     text="Рассчитать"
@@ -46,15 +47,16 @@ export const FibonacciPage: React.FC = () => {
                     onClick={handleClick}
                     isLoader={loader}
                     disabled={!inputValue || parseInt(inputValue) > 19}
+                    extraClass={styles[`submit-btn`]}
                 />
             </div>
             {fibArr.length > 0 && (
                 <ul className={styles[`solution-list`]}>
-                    {fibArr.map((number, index) => (
+                    {fibArr.map((item, index) => (
                         <li key={index}>
                             <Circle
                                 state={ElementStates.Default}
-                                letter={number.toString()}
+                                letter={item.toString()}
                                 index={index}
                             />
                         </li>
