@@ -4,7 +4,7 @@ interface IStack<T> {
     peek(): T | undefined;
     size(): number;
     clear(): void;
-    getElements: () => T[];
+    getElements(): T[];
 }
 export class Stack<T> implements IStack<T> {
     private storage: T[] = [];
@@ -23,9 +23,6 @@ export class Stack<T> implements IStack<T> {
     peek(): T | undefined {
         return this.storage[this.size() - 1];
     }
-    // get peek(): T | undefined {
-    //     return this.storage[this.size() - 1];
-    // }
 
     clear(): void {
         this.storage = [];

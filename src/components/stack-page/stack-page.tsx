@@ -78,14 +78,14 @@ export const StackPage: React.FC = () => {
                     text="Добавить"
                     type="submit"
                     onClick={addElement}
-                    disabled={!inputValue}
+                    disabled={!inputValue || removeBtnLoader || resetBtnLoader}
                     extraClass={styles[`add-btn`]}
                     isLoader={addBtnLoader}
                 />
                 <Button
                     text="Удалить"
                     onClick={removeElement}
-                    disabled={!stackArr.length}
+                    disabled={!stackArr.length || addBtnLoader || resetBtnLoader}
                     extraClass={styles[`remove-btn`]}
                     isLoader={removeBtnLoader}
                 />
@@ -93,7 +93,7 @@ export const StackPage: React.FC = () => {
                     text="Очистить"
                     type="reset"
                     onClick={resetAll}
-                    disabled={!stackArr.length}
+                    disabled={!stackArr.length || addBtnLoader || removeBtnLoader}
                     extraClass={styles[`reset-btn`]}
                     isLoader={resetBtnLoader}
                 />
