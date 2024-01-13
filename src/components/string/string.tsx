@@ -7,13 +7,13 @@ import {Circle} from "../ui/circle/circle";
 import {reverse} from "./utils/reverse";
 import {ElementStates} from "../../types/element-states";
 
-export type TArray = {
+export type TArrayItem = {
     value: string;
     color: ElementStates;
 };
 export const StringComponent: React.FC = () => {
     const [inputValue, setInputValue] = useState('');
-    const [arr, setArr] = useState<Array<TArray>>([]);
+    const [arr, setArr] = useState<Array<TArrayItem>>([]);
     const [loader, setLoader] = useState(false);
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -49,11 +49,12 @@ export const StringComponent: React.FC = () => {
 
             {arr.length > 0 && (
                 <ul className={styles[`solution-list`]}>
-                    {arr.map((char: TArray, index: number) => (
+                    {arr.map((char: TArrayItem, index: number) => (
                         <li key={index}>
                             <Circle
                                 letter={char.value}
-                                state={char.color}/>
+                                state={char.color}
+                            />
                         </li>
                     ))}
                 </ul>

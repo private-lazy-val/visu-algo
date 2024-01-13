@@ -1,13 +1,13 @@
 import {ElementStates} from "../../../types/element-states";
 import {swap} from "../../../utils/swap";
 import {getRandomInt} from "../../../utils/get-random-int";
-import {TArray} from "../sorting-page";
+import {TArrayItem} from "../sorting-page";
 import {Dispatch, SetStateAction} from "react";
 import {DELAY_IN_MS} from "../../../constants/delays";
 import {delay} from "../../../utils/delay";
 
-export const getRandomArr = (): TArray[] => {
-    const arr: TArray[] = [];
+export const getRandomArr = (): TArrayItem[] => {
+    const arr: TArrayItem[] = [];
     const arrLength = getRandomInt(3, 17);
     for (let i = 0; i < arrLength; i++) {
         arr.push({value: Math.floor(Math.random() * 101), color: ElementStates.Default});
@@ -16,12 +16,12 @@ export const getRandomArr = (): TArray[] => {
 }
 
 // Reset columns' colors before running a sorting algorithm
-const resetColors = (arr: TArray[]) => {
+const resetColors = (arr: TArrayItem[]) => {
     arr.forEach(item => item.color = ElementStates.Default);
 };
 
-export const selectionSortAscending = async (arr: TArray[],
-                                             setArr: Dispatch<SetStateAction<TArray[]>>,
+export const selectionSortAscending = async (arr: TArrayItem[],
+                                             setArr: Dispatch<SetStateAction<TArrayItem[]>>,
                                              setLoader: Dispatch<SetStateAction<boolean>>) => {
     setLoader(true);
     resetColors(arr);
@@ -58,8 +58,8 @@ export const selectionSortAscending = async (arr: TArray[],
     setLoader(false);
 }
 
-export const selectionSortDescending = async (arr: TArray[],
-                                              setArr: Dispatch<SetStateAction<TArray[]>>,
+export const selectionSortDescending = async (arr: TArrayItem[],
+                                              setArr: Dispatch<SetStateAction<TArrayItem[]>>,
                                               setLoader: Dispatch<SetStateAction<boolean>>) => {
     setLoader(true);
     resetColors(arr);
@@ -94,8 +94,8 @@ export const selectionSortDescending = async (arr: TArray[],
     setLoader(false);
 }
 
-export const bubbleSortAscending = async (arr: TArray[],
-                                          setArr: Dispatch<SetStateAction<TArray[]>>,
+export const bubbleSortAscending = async (arr: TArrayItem[],
+                                          setArr: Dispatch<SetStateAction<TArrayItem[]>>,
                                           setLoader: Dispatch<SetStateAction<boolean>>) => {
     setLoader(true);
     resetColors(arr);
@@ -131,8 +131,8 @@ export const bubbleSortAscending = async (arr: TArray[],
     setLoader(false);
 }
 
-export const bubbleSortDescending = async (arr: TArray[],
-                                           setArr: Dispatch<SetStateAction<TArray[]>>,
+export const bubbleSortDescending = async (arr: TArrayItem[],
+                                           setArr: Dispatch<SetStateAction<TArrayItem[]>>,
                                            setLoader: Dispatch<SetStateAction<boolean>>) => {
     setLoader(true);
     resetColors(arr);

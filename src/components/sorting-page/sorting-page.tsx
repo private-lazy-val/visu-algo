@@ -13,12 +13,12 @@ import {
     selectionSortDescending
 } from "./utils/sorting-page-utils";
 
-export type TArray = {
+export type TArrayItem = {
     value: number;
     color: ElementStates;
 };
 export const SortingPage: React.FC = () => {
-    const [arr, setArr] = useState<TArray[]>([]);
+    const [arr, setArr] = useState<TArrayItem[]>([]);
     const [sortName, setSortName] = useState("Выбор");
     const [sortDirection, setSortDirection] = useState<Direction>();
     const [loader, setLoader] = useState(false);

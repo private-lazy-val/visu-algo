@@ -2,11 +2,11 @@ import {ElementStates} from "../../../types/element-states";
 import {Dispatch, SetStateAction} from "react";
 import {DELAY_IN_MS} from "../../../constants/delays";
 import {delay} from "../../../utils/delay";
-import {TArray} from "../string";
+import {TArrayItem} from "../string";
 import {swap} from "../../../utils/swap";
 
-export const reverse = async (arr: TArray[],
-                        setCharArr: Dispatch<SetStateAction<TArray[]>>,
+export const reverse = async (arr: TArrayItem[],
+                        setCharArr: Dispatch<SetStateAction<TArrayItem[]>>,
                         setLoader: Dispatch<SetStateAction<boolean>>) => {
 
     setLoader(true);
