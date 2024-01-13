@@ -12,8 +12,6 @@ import {
     selectionSortAscending,
     selectionSortDescending
 } from "./utils/sorting-page-utils";
-import {delay} from "../../utils/delay";
-import {DELAY_IN_MS} from "../../constants/delays";
 
 export type TArray = {
     value: number;
@@ -36,15 +34,8 @@ export const SortingPage: React.FC = () => {
         setSortName(event.target.value);
     };
 
-    const resetColors = () => {
-        const resetArr = arr.map(item => ({...item, color: ElementStates.Default}));
-        setArr(resetArr);
-    };
-
-    const handleClick = async (sortDirection: Direction) => {
+    const handleClick = (sortDirection: Direction) => {
         setSortDirection(sortDirection);
-        resetColors();
-        await delay(DELAY_IN_MS);
         if (sortDirection === Direction.Ascending && sortName === 'Выбор') {
             selectionSortAscending(arr, setArr, setLoader);
         }
