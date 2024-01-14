@@ -30,7 +30,8 @@ export const QueuePage: React.FC = () => {
         setInputValue(e.target.value);
     };
 
-    const addElement = async () => {
+    const addElement = async (e: React.MouseEvent) => {
+        e.preventDefault();
         setAddBtnLoader(true);
 
         if (inputValue) {

@@ -19,7 +19,8 @@ export const StringComponent: React.FC = () => {
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.currentTarget.value);
     };
-    const handleClick = () => {
+    const handleClick = (e: React.MouseEvent): void => {
+        e.preventDefault();
         const newArr: { value: string, color: ElementStates }[] =
             inputValue.split('').map((value => ({
                 value, color: ElementStates.Default

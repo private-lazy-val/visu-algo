@@ -24,7 +24,8 @@ export const StackPage: React.FC = () => {
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.currentTarget.value);
     };
-    const addElement = async () => {
+    const addElement = async (e: React.MouseEvent) => {
+        e.preventDefault();
         setAddBtnLoader(true);
         if (inputValue) {
             stack.push({value: inputValue, color: ElementStates.Changing});

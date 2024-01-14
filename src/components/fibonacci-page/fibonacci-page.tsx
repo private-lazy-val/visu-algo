@@ -18,7 +18,8 @@ export const FibonacciPage: React.FC = () => {
         setInputValue(e.currentTarget.value);
     }
 
-    const handleClick = async () => {
+    const handleClick = async (e: React.MouseEvent) => {
+        e.preventDefault();
         setLoader(true);
         const arr = getFibonacciNumbers(Number(inputValue));
         for (let i = 0; i < arr.length; i++) {

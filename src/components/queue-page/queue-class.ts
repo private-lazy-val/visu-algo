@@ -1,20 +1,12 @@
 interface IQueue<T> {
     enqueue(item: T): void;
-
     dequeue(): void;
-
     peek(): T | null;
-
     getHead(): number;
-
     getTail(): number;
-
     getPreTail(): number;
-
     isEmpty(): boolean;
-
     clear(): void;
-
     hasRoom(): boolean;
 }
 

@@ -1,0 +1,30 @@
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.input {
+    max-width: 204px;
+    width: 100%;
+}
+
+.input input {
+    height: 60px;
+}
+
+.add-head-btn, .add-tail-btn, .remove-head-btn, .remove-tail-btn {
+    width: 175px;
+}
+
+.add-by-index-btn, .remove-by-index-btn {
+    width: 362px;
+}
