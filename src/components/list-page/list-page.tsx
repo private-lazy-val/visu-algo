@@ -10,6 +10,7 @@ import {getRandomArrayWIthMaxLength} from "../../utils/get-random-array";
 import {ArrowIcon} from "../ui/icons/arrow-icon";
 import {delay} from "../../utils/delay";
 import {DELAY_IN_MS} from "../../constants/delays";
+import {useForm} from "../../hooks/use-from";
 
 type TListItem = {
     value: string;
@@ -36,8 +37,10 @@ const initialLoaderStates: LoaderStates = {
 
 const initialArray: string[] = getRandomArrayWIthMaxLength(4, 9999);
 export const ListPage: React.FC = () => {
-    const [inputValue, setInputValue] = useState("");
-    const [inputIndex, setInputIndex] = useState("");
+    const { values, setValues, handleChange } = useForm({
+        inputValue: '',
+        inputIndex: ''
+    });
 
     const [loaderStates, setLoaderStates] = useState<LoaderStates>(initialLoaderStates);
 
@@ -47,7 +50,6 @@ export const ListPage: React.FC = () => {
     const [removeNodeFromTailOperation, setRemoveNodeFromTailOperation] = useState(false);
     const [addNodeByIndexOperation, setAddNodeByIndexOperation] = useState(false);
     const [removeNodeByIndexOperation, setRemoveNodeByIndexOperation] = useState(false);
-
 
     // the index on the Node where the new Node should go
     const [inputValueIndex, setInputValueIndex] = useState<number>(0);
@@ -61,22 +63,14 @@ export const ListPage: React.FC = () => {
     const isAnyLoaderActive = (): boolean => {
         return Object.values(loaderStates).some(state => state);
     };
-
-    const onValueChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        setInputValue(e.target.value);
-    };
-    const onIndexChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        setInputIndex(e.target.value);
-    };
-
     const addNodeToHead = async (e: React.MouseEvent): Promise<void> => {
         e.preventDefault();
-        if (inputValue && list.getSize() < 6) {
+        if (values.inputValue && list.getSize() < 6) {
             setLoaderStates(prev => ({...prev, addHead: true}));
             setInputValueIndex(0);
 
             setAddNodeToHeadOperation(true);
-            list.prepend(inputValue);
+            list.prepend(values.inputValue);
             await delay(DELAY_IN_MS);
             setAddNodeToHeadOperation(false);
 
@@ -89,19 +83,19 @@ export const ListPage: React.FC = () => {
 
             // reset
             setInputValueIndex(0);
-            setInputValue("");
+            setValues({ ...values, inputValue: '' });
             setLoaderStates(prev => ({...prev, addHead: false}));
         }
     }
 
     const addNodeToTail = async (e: React.MouseEvent): Promise<void> => {
         e.preventDefault();
-        if (inputValue && list.getSize() < 6) {
+        if (values.inputValue && list.getSize() < 6) {
             setLoaderStates(prev => ({...prev, addTail: true}));
             setInputValueIndex(list.getSize() - 1);
 
             setAddNodeToTailOperation(true);
-            list.append(inputValue);
+            list.append(values.inputValue);
             await delay(DELAY_IN_MS);
             setAddNodeToTailOperation(false);
 
@@ -114,7 +108,7 @@ export const ListPage: React.FC = () => {
 
             // reset
             setInputValueIndex(0);
-            setInputValue("");
+            setValues({ ...values, inputValue: '' });
             setLoaderStates(prev => ({...prev, addTail: false}));
         }
     }
@@ -167,61 +161,68 @@ export const ListPage: React.FC = () => {
 
     const addNodeByIndex = async (e: React.MouseEvent): Promise<void> => {
         e.preventDefault();
-        if ((Number(inputIndex) < 6) && list.getSize() < 6 && inputValue && (list.getSize() >= Number(inputIndex))) {
+        if ((Number(values.inputIndex) < 6
+            && Number(values.inputIndex) >= 0)
+            && list.getSize() < 6
+            && values.inputValue
+            && (list.getSize() >= Number(values.inputIndex))) {
             setLoaderStates(prev => ({...prev, addByIndex: true}));
 
             setAddNodeByIndexOperation(true);
             let newArr = list.toArrayWithDefaultColor();
-            for (let i = 0; i <= Number(inputIndex); i++) {
+            for (let i = 0; i <= Number(values.inputIndex); i++) {
                 setInputValueIndex(i);
                 await delay(DELAY_IN_MS);
-                if(i === Number(inputIndex) - 1 && Number(inputIndex) === newArr.length) {
+                if(i === Number(values.inputIndex) - 1 && Number(values.inputIndex) === newArr.length) {
                     newArr = [...newArr, {value: '', color: ElementStates.Default}]
                 }
-                if (i < Number(inputIndex)) {
+                if (i < Number(values.inputIndex)) {
                     newArr[i].color = ElementStates.Changing;
                     setListArr(newArr);
-                } else if (i === Number(inputIndex)) {
+                } else if (i === Number(values.inputIndex)) {
                     setListArr(newArr);
                 }
             }
 
-            list.addByIndex(Number(inputIndex), inputValue);
+            list.addByIndex(Number(values.inputIndex), values.inputValue);
             setAddNodeByIndexOperation(false);
 
             const finalArr = list.toArrayWithDefaultColor();
-            finalArr[Number(inputIndex)].color = ElementStates.Modified;
+            finalArr[Number(values.inputIndex)].color = ElementStates.Modified;
             setListArr(finalArr);
             await delay(DELAY_IN_MS);
-            finalArr[Number(inputIndex)].color = ElementStates.Default;
+            finalArr[Number(values.inputIndex)].color = ElementStates.Default;
             setListArr(finalArr);
 
             // reset
             setInputValueIndex(0);
-            setInputValue("");
-            setInputIndex("");
+            setValues({ ...values, inputValue: '' });
+            setValues({ ...values, inputIndex: '' });
             setLoaderStates(prev => ({...prev, addByIndex: false}));
         }
     }
 
     const removeNodeByIndex = async (): Promise<void> => {
-        if ((Number(inputIndex) < 6) && list.getSize() > 0 && (list.getSize() - 1 >= Number(inputIndex))) {
+        if ((Number(values.inputIndex) < 6
+            && Number(values.inputIndex) >= 0)
+            && list.getSize() > 0
+            && (list.getSize() - 1 >= Number(values.inputIndex))) {
             setLoaderStates(prev => ({...prev, removeByIndex: true}));
             const newArr = list.toArrayWithDefaultColor();
-            setInputValueIndex(Number(inputIndex));
-            setCircleTempValue(newArr[Number(inputIndex)].value);
-            for (let i = 0; i <= Number(inputIndex); i++) {
+            setInputValueIndex(Number(values.inputIndex));
+            setCircleTempValue(newArr[Number(values.inputIndex)].value);
+            for (let i = 0; i <= Number(values.inputIndex); i++) {
                 newArr[i].color = ElementStates.Changing;
                 setListArr([...newArr]);
                 await delay(DELAY_IN_MS);
             }
 
             setRemoveNodeByIndexOperation(true);
-            newArr[Number(inputIndex)].value = '';
-            newArr[Number(inputIndex)].color = ElementStates.Default;
+            newArr[Number(values.inputIndex)].value = '';
+            newArr[Number(values.inputIndex)].color = ElementStates.Default;
             setListArr(newArr);
             await delay(DELAY_IN_MS);
-            list.deleteByIndex(Number(inputIndex));
+            list.deleteByIndex(Number(values.inputIndex));
             setRemoveNodeByIndexOperation(false);
 
             const finalArr = list.toArrayWithDefaultColor();
@@ -230,7 +231,7 @@ export const ListPage: React.FC = () => {
             // reset
             setCircleTempValue("");
             setInputValueIndex(0);
-            setInputIndex("");
+            setValues({ ...values, inputIndex: '' });
             setLoaderStates(prev => ({...prev, removeByIndex: false}));
         }
     }
@@ -263,18 +264,19 @@ export const ListPage: React.FC = () => {
             <div className={styles[`input-wrapper`]}>
                 <div className={styles.row}>
                     <Input
+                        name="inputValue"
                         placeholder="Введите значение"
                         maxLength={4}
                         isLimitText={true}
-                        value={inputValue}
-                        onChange={onValueChange}
+                        value={values.inputValue}
+                        onChange={handleChange}
                         extraClass={styles.input}
                     />
                     <Button
                         text="Добавить в head"
                         type="submit"
                         onClick={addNodeToHead}
-                        disabled={!inputValue || isAnyLoaderActive() || list.getSize() >= 6}
+                        disabled={!values.inputValue || isAnyLoaderActive() || list.getSize() >= 6}
                         extraClass={styles[`add-head-btn`]}
                         isLoader={loaderStates.addHead}
                     />
@@ -282,7 +284,7 @@ export const ListPage: React.FC = () => {
                         text="Добавить в tail"
                         type="submit"
                         onClick={addNodeToTail}
-                        disabled={!inputValue || isAnyLoaderActive() || list.getSize() >= 6}
+                        disabled={!values.inputValue || isAnyLoaderActive() || list.getSize() >= 6}
                         extraClass={styles[`add-tail-btn`]}
                         isLoader={loaderStates.addTail}
                     />
@@ -303,32 +305,36 @@ export const ListPage: React.FC = () => {
                 </div>
                 <div className={styles.row}>
                     <Input
+                        name="inputIndex"
                         placeholder="Введите индекс"
-                        value={inputIndex}
-                        onChange={onIndexChange}
+                        type="number"
+                        value={values.inputIndex}
+                        onChange={handleChange}
                         extraClass={styles.input}
                     />
                     <Button
                         text="Добавить по индексу"
                         type="submit"
                         onClick={addNodeByIndex}
-                        disabled={!inputValue
-                            || !inputIndex
+                        disabled={!values.inputValue
+                            || !values.inputIndex
                             || isAnyLoaderActive()
                             || list.getSize() >= 6
-                            || list.getSize() < Number(inputIndex)
-                            || (Number(inputIndex) >= 6)}
+                            || list.getSize() < Number(values.inputIndex)
+                            || Number(values.inputIndex) >= 6
+                            || Number(values.inputIndex) < 0}
                         extraClass={styles[`add-by-index-btn`]}
                         isLoader={loaderStates.addByIndex}
                     />
                     <Button
                         text="Удалить по индексу"
                         onClick={removeNodeByIndex}
-                        disabled={!inputIndex
+                        disabled={!values.inputIndex
                             || isAnyLoaderActive()
                             || list.getSize() === 0
-                            || list.getSize() - 1 < Number(inputIndex)
-                            || (Number(inputIndex) >= 6)}
+                            || list.getSize() - 1 < Number(values.inputIndex)
+                            || Number(values.inputIndex) >= 6
+                            || Number(values.inputIndex) < 0}
                         extraClass={styles[`remove-by-index-btn`]}
                         isLoader={loaderStates.removeByIndex}
                     />
@@ -337,8 +343,8 @@ export const ListPage: React.FC = () => {
             {listArr.length > 0 && (
                 <ul className={styles[`solution-list`]}>
                     {listArr.map((item: TListItem, index: number) => (
-                        <>
-                            <li key={index} className={styles[`solution-list__item`]}>
+                        <li key={index} className={styles[`solution-list__item`]}>
+                            <div className={styles[`circle-wrapper`]}>
                                 {isAnyLoaderActive()
                                     && (addNodeToHeadOperation
                                         || addNodeToTailOperation
@@ -347,7 +353,7 @@ export const ListPage: React.FC = () => {
                                     && <Circle
                                         extraClass={styles[`small-top-circle`]}
                                         isSmall
-                                        letter={inputValue}
+                                        letter={values.inputValue}
                                         state={ElementStates.Changing}
                                     />}
                                 {isAnyLoaderActive()
@@ -368,9 +374,9 @@ export const ListPage: React.FC = () => {
                                     letter={(item.value)}
                                     state={item.color}
                                 />
-                            </li>
+                            </div>
                             {index !== listArr.length - 1 && <ArrowIcon/>}
-                        </>
+                        </li>
                     ))}
                 </ul>
             )}

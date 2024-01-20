@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {useState} from "react";
 import {SolutionLayout} from "../ui/solution-layout/solution-layout";
 import styles from './fibonacci-page.module.css';
 import {Input} from "../ui/input/input";
@@ -8,20 +8,17 @@ import {ElementStates} from "../../types/element-states";
 import {getFibonacciNumbers} from "./utils/get-fibonacci-numbers";
 import {delay} from "../../utils/delay";
 import {SHORT_DELAY_IN_MS} from "../../constants/delays";
+import {useForm} from "../../hooks/use-from";
 
 export const FibonacciPage: React.FC = () => {
-    const [inputValue, setInputValue] = useState('');
+    const { values, handleChange } = useForm({ inputValue: '' });
     const [fibArr, setFibArr] = useState<number[]>([]);
     const [loader, setLoader] = useState(false);
-
-    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setInputValue(e.currentTarget.value);
-    }
 
     const handleClick = async (e: React.MouseEvent) => {
         e.preventDefault();
         setLoader(true);
-        const arr = getFibonacciNumbers(Number(inputValue));
+        const arr = getFibonacciNumbers(Number(values.inputValue));
         for (let i = 0; i < arr.length; i++) {
             await delay(SHORT_DELAY_IN_MS);
             setFibArr(arr.slice(0, i + 1));
@@ -35,11 +32,12 @@ export const FibonacciPage: React.FC = () => {
                 <Input
                     placeholder="Введите число"
                     type="number"
+                    name="inputValue"
                     isLimitText={true}
                     min={1}
                     max={19}
-                    value={inputValue}
-                    onChange={onChange}
+                    value={values.inputValue}
+                    onChange={handleChange}
                     extraClass={styles.input}
                 />
                 <Button
@@ -47,7 +45,7 @@ export const FibonacciPage: React.FC = () => {
                     type="submit"
                     onClick={handleClick}
                     isLoader={loader}
-                    disabled={!inputValue || parseInt(inputValue) > 19}
+                    disabled={!values.inputValue || parseInt(values.inputValue) > 19}
                     extraClass={styles[`submit-btn`]}
                 />
             </div>

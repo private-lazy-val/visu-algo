@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {useState} from "react";
 import {SolutionLayout} from "../ui/solution-layout/solution-layout";
 import {Input} from "../ui/input/input";
 import {Button} from "../ui/button/button";
@@ -6,25 +6,24 @@ import styles from './string.module.css';
 import {Circle} from "../ui/circle/circle";
 import {reverseArray} from "./utils/reverseArray";
 import {ElementStates} from "../../types/element-states";
+import {useForm} from "../../hooks/use-from";
 
 export type TArrayItem = {
     value: string;
     color: ElementStates;
 };
 export const StringComponent: React.FC = () => {
-    const [inputValue, setInputValue] = useState('');
+    const { values, handleChange } = useForm({ inputValue: '' });
+
     const [arr, setArr] = useState<Array<TArrayItem>>([]);
     const [loader, setLoader] = useState(false);
 
-    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setInputValue(e.currentTarget.value);
-    };
     const handleClick = (e: React.MouseEvent): void => {
         e.preventDefault();
-        const newArr: { value: string, color: ElementStates }[] =
-            inputValue.split('').map((value => ({
+        const newArr: TArrayItem[] =
+            values.inputValue.split('').map(value => ({
                 value, color: ElementStates.Default
-            })));
+            }));
         reverseArray(newArr, setArr, setLoader);
     };
 
@@ -32,10 +31,11 @@ export const StringComponent: React.FC = () => {
         <SolutionLayout title="Строка">
             <div className={styles[`input-wrapper`]}>
                 <Input
+                    name="inputValue"
                     maxLength={11}
                     isLimitText={true}
-                    value={inputValue}
-                    onChange={onChange}
+                    value={values.inputValue}
+                    onChange={handleChange}
                     extraClass={styles.input}
                 />
                 <Button
@@ -43,7 +43,7 @@ export const StringComponent: React.FC = () => {
                     type="submit"
                     onClick={handleClick}
                     isLoader={loader}
-                    disabled={!inputValue}
+                    disabled={!values.inputValue}
                     extraClass={styles[`submit-btn`]}
                 />
             </div>

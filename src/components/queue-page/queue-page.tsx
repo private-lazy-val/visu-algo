@@ -8,6 +8,7 @@ import {ElementStates} from "../../types/element-states";
 import {Queue} from "./queue-class";
 import {delay} from "../../utils/delay";
 import {SHORT_DELAY_IN_MS} from "../../constants/delays";
+import {useForm} from "../../hooks/use-from";
 
 type TQueueItem = {
     value?: string;
@@ -18,7 +19,7 @@ const emptyQueue = Array.from({length: 7},
     () => ({value: '', color: ElementStates.Default}));
 
 export const QueuePage: React.FC = () => {
-    const [inputValue, setInputValue] = useState("");
+    const { values, setValues, handleChange } = useForm({ inputValue: '' });
     const [addBtnLoader, setAddBtnLoader] = useState(false);
     const [removeBtnLoader, setRemoveBtnLoader] = useState(false);
     const [resetBtnLoader, setResetBtnLoader] = useState(false);
@@ -26,24 +27,20 @@ export const QueuePage: React.FC = () => {
     const [queueArr, setQueueArr] = useState<TQueueItem[]>(emptyQueue);
     const [queue] = useState(new Queue<TQueueItem>(7));
 
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setInputValue(e.target.value);
-    };
-
     const addElement = async (e: React.MouseEvent) => {
         e.preventDefault();
         setAddBtnLoader(true);
 
-        if (inputValue) {
-            setInputValue('');
+        if (values.inputValue) {
+            setValues({ ...values, inputValue: '' });
             queueArr[queue.getTail()] = {color: ElementStates.Changing};
             setQueueArr([...queueArr]);
             await delay(SHORT_DELAY_IN_MS);
-            queue.enqueue({value: inputValue});
-            queueArr[queue.getPreTail()] = {value: inputValue, color: ElementStates.Changing};
+            queue.enqueue({value: values.inputValue});
+            queueArr[queue.getPreTail()] = {value: values.inputValue, color: ElementStates.Changing};
             setQueueArr([...queueArr]);
             await delay(SHORT_DELAY_IN_MS);
-            queueArr[queue.getPreTail()] = {value: inputValue, color: ElementStates.Default};
+            queueArr[queue.getPreTail()] = {value: values.inputValue, color: ElementStates.Default};
             setQueueArr([...queueArr]);
         }
         setAddBtnLoader(false);
@@ -76,17 +73,18 @@ export const QueuePage: React.FC = () => {
         <SolutionLayout title="Очередь">
             <div className={styles[`input-wrapper`]}>
                 <Input
+                    name="inputValue"
                     maxLength={4}
                     isLimitText={true}
-                    value={inputValue}
-                    onChange={onChange}
+                    value={values.inputValue}
+                    onChange={handleChange}
                     extraClass={styles.input}
                 />
                 <Button
                     text="Добавить"
                     type="submit"
                     onClick={addElement}
-                    disabled={!inputValue || !queue.hasRoom() || removeBtnLoader || resetBtnLoader}
+                    disabled={!values.inputValue || !queue.hasRoom() || removeBtnLoader || resetBtnLoader}
                     extraClass={styles[`add-btn`]}
                     isLoader={addBtnLoader}
                 />

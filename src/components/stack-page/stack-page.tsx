@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {useState} from "react";
 import {SolutionLayout} from "../ui/solution-layout/solution-layout";
 import styles from "./stack-page.module.css";
 import {Input} from "../ui/input/input";
@@ -8,28 +8,26 @@ import {Stack} from "./stack-class";
 import {delay} from "../../utils/delay";
 import {SHORT_DELAY_IN_MS} from "../../constants/delays";
 import {Circle} from "../ui/circle/circle";
+import {useForm} from "../../hooks/use-from";
 
 type TStackItem = {
     value: string;
     color: ElementStates;
 };
 export const StackPage: React.FC = () => {
-    const [inputValue, setInputValue] = useState('');
+    const { values, setValues, handleChange } = useForm({ inputValue: '' });
     const [addBtnLoader, setAddBtnLoader] = useState(false);
     const [removeBtnLoader, setRemoveBtnLoader] = useState(false);
     const [resetBtnLoader, setResetBtnLoader] = useState(false);
 
     const [stackArr, setStackArr] = useState<TStackItem[]>([]);
     const [stack] = useState(new Stack<TStackItem>());
-    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setInputValue(e.currentTarget.value);
-    };
     const addElement = async (e: React.MouseEvent) => {
         e.preventDefault();
         setAddBtnLoader(true);
-        if (inputValue) {
-            stack.push({value: inputValue, color: ElementStates.Changing});
-            setInputValue('');
+        if (values.inputValue) {
+            stack.push({value: values.inputValue, color: ElementStates.Changing});
+            setValues({ ...values, inputValue: '' });
             setStackArr([...stack.getElements()]);
             await delay(SHORT_DELAY_IN_MS);
 
@@ -69,17 +67,18 @@ export const StackPage: React.FC = () => {
         <SolutionLayout title="Стек">
             <div className={styles[`input-wrapper`]}>
                 <Input
+                    name="inputValue"
                     maxLength={4}
                     isLimitText={true}
-                    value={inputValue}
-                    onChange={onChange}
+                    value={values.inputValue}
+                    onChange={handleChange}
                     extraClass={styles.input}
                 />
                 <Button
                     text="Добавить"
                     type="submit"
                     onClick={addElement}
-                    disabled={!inputValue || removeBtnLoader || resetBtnLoader}
+                    disabled={!values.inputValue || removeBtnLoader || resetBtnLoader}
                     extraClass={styles[`add-btn`]}
                     isLoader={addBtnLoader}
                 />
