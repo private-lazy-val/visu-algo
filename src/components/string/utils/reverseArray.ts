@@ -5,16 +5,16 @@ import {delay} from "../../../utils/delay";
 import {TArrayItem} from "../string";
 import {swap} from "../../../utils/swap";
 
-export const reverse = async (arr: TArrayItem[],
-                        setCharArr: Dispatch<SetStateAction<TArrayItem[]>>,
-                        setLoader: Dispatch<SetStateAction<boolean>>) => {
+// Reserve in place
+export const reverseArray = async (arr: TArrayItem[],
+                                   setCharArr: Dispatch<SetStateAction<TArrayItem[]>>,
+                                   setLoader: Dispatch<SetStateAction<boolean>>) => {
 
     setLoader(true);
 
     const mid = Math.ceil(arr.length / 2);
 
     for (let i = 0; i < mid; i++) {
-
         let j = arr.length - 1 - i;
 
         if (i !== j) {

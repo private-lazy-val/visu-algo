@@ -19,11 +19,11 @@ const emptyQueue = Array.from({length: 7},
 
 export const QueuePage: React.FC = () => {
     const [inputValue, setInputValue] = useState("");
-    const [queueArr, setQueueArr] = useState<TQueueItem[]>(emptyQueue);
     const [addBtnLoader, setAddBtnLoader] = useState(false);
     const [removeBtnLoader, setRemoveBtnLoader] = useState(false);
     const [resetBtnLoader, setResetBtnLoader] = useState(false);
 
+    const [queueArr, setQueueArr] = useState<TQueueItem[]>(emptyQueue);
     const [queue] = useState(new Queue<TQueueItem>(7));
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,8 +1,10 @@
-export class Node<T> {
-    value: T;
-    next: Node<T> | null;
+import {ElementStates} from "../../types/element-states";
 
-    constructor(value: T, next?: Node<T> | null) {
+export class LinkedListNode<T> {
+    value: T;
+    next: LinkedListNode<T> | null;
+
+    constructor(value: T, next?: LinkedListNode<T> | null) {
         this.value = value;
         this.next = (next === undefined ? null : next);
     }
@@ -10,24 +12,20 @@ export class Node<T> {
 
 interface ILinkedList<T> {
     prepend(element: T): void;
-
     append(element: T): void;
-
     addByIndex(index: number, element: T): void;
-
     deleteByIndex(index: number): void;
-
     deleteHead(): void;
-
     deleteTail(): void;
-
     toArray(): T[];
+    toArrayWithDefaultColor(): Array<{ value: T, color: ElementStates }>;
+    getSize(): number;
 }
 
 export class LinkedList<T> implements ILinkedList<T> {
-    private head: Node<T> | null;
-    private tail: Node<T> | null;
-    private size: number;
+    private head: LinkedListNode<T> | null;
+    private tail: LinkedListNode<T> | null;
+    private size: number; // the factual number of nodes in the list
     private extend(values: T[]) {
         values.forEach((value) => this.append(value));
     };
@@ -42,7 +40,7 @@ export class LinkedList<T> implements ILinkedList<T> {
     }
 
     append(element: T): void {
-        const node: Node<T> = new Node(element);
+        const node: LinkedListNode<T> = new LinkedListNode(element);
         if (!this.head) {
             this.head = node;
         } else {
@@ -53,7 +51,7 @@ export class LinkedList<T> implements ILinkedList<T> {
     }
 
     prepend(element: T): void {
-        const node: Node<T> = new Node(element);
+        const node: LinkedListNode<T> = new LinkedListNode(element);
         if (this.head === null || this.tail === null) {
             this.head = node;
             this.tail = node;
@@ -70,7 +68,7 @@ export class LinkedList<T> implements ILinkedList<T> {
             console.log('Enter a valid index');
             return;
         } else {
-            const node = new Node(element);
+            const node = new LinkedListNode(element);
             // добавить элемент в начало списка
             if (index === 0) {
                 node.next = this.head;
@@ -159,4 +157,11 @@ export class LinkedList<T> implements ILinkedList<T> {
         }
         return res;
     }
+
+    toArrayWithDefaultColor = (): { value: T, color: ElementStates }[] => {
+        return this.toArray().map(item => ({value: item, color: ElementStates.Default}));
+    };
+
+    getSize = (): number => this.size;
+
 }

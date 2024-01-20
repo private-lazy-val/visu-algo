@@ -12,6 +12,10 @@
     gap: 12px;
 }
 
+.row button {
+    white-space: nowrap;
+}
+
 .input {
     max-width: 204px;
     width: 100%;
@@ -28,3 +32,34 @@
 .add-by-index-btn, .remove-by-index-btn {
     width: 362px;
 }
+
+
+.solution-list {
+    margin-top: 120px;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 0;
+}
+
+.solution-list__item {
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    gap: 8px;
+    position: relative;
+}
+
+.small-top-circle {
+    position: absolute;
+    top: -68px;
+ }
+
+.small-bottom-circle {
+    position: absolute;
+    top: 121px;
+}
+

@@ -4,7 +4,7 @@ import {Input} from "../ui/input/input";
 import {Button} from "../ui/button/button";
 import styles from './string.module.css';
 import {Circle} from "../ui/circle/circle";
-import {reverse} from "./utils/reverse";
+import {reverseArray} from "./utils/reverseArray";
 import {ElementStates} from "../../types/element-states";
 
 export type TArrayItem = {
@@ -25,7 +25,7 @@ export const StringComponent: React.FC = () => {
             inputValue.split('').map((value => ({
                 value, color: ElementStates.Default
             })));
-        reverse(newArr, setArr, setLoader);
+        reverseArray(newArr, setArr, setLoader);
     };
 
     return (

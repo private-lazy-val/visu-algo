@@ -15,11 +15,11 @@ type TStackItem = {
 };
 export const StackPage: React.FC = () => {
     const [inputValue, setInputValue] = useState('');
-    const [stackArr, setStackArr] = useState<TStackItem[]>([]);
     const [addBtnLoader, setAddBtnLoader] = useState(false);
     const [removeBtnLoader, setRemoveBtnLoader] = useState(false);
     const [resetBtnLoader, setResetBtnLoader] = useState(false);
 
+    const [stackArr, setStackArr] = useState<TStackItem[]>([]);
     const [stack] = useState(new Stack<TStackItem>());
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.currentTarget.value);

@@ -1,19 +1,9 @@
 import {ElementStates} from "../../../types/element-states";
 import {swap} from "../../../utils/swap";
-import {getRandomInt} from "../../../utils/get-random-int";
 import {TArrayItem} from "../sorting-page";
 import {Dispatch, SetStateAction} from "react";
 import {DELAY_IN_MS} from "../../../constants/delays";
 import {delay} from "../../../utils/delay";
-
-export const getRandomArr = (): TArrayItem[] => {
-    const arr: TArrayItem[] = [];
-    const arrLength = getRandomInt(3, 17);
-    for (let i = 0; i < arrLength; i++) {
-        arr.push({value: Math.floor(Math.random() * 101), color: ElementStates.Default});
-    }
-    return arr;
-}
 
 // Reset columns' colors before running a sorting algorithm
 const resetColors = (arr: TArrayItem[]) => {

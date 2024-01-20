@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {SolutionLayout} from "../ui/solution-layout/solution-layout";
 import {RadioInput} from "../ui/radio-input/radio-input";
 import {Button} from "../ui/button/button";
@@ -8,27 +8,22 @@ import {ElementStates} from "../../types/element-states";
 import {Column} from "../ui/column/column";
 import {
     bubbleSortAscending, bubbleSortDescending,
-    getRandomArr,
     selectionSortAscending,
     selectionSortDescending
 } from "./utils/sorting-page-utils";
+import {getRandomArrayWithMinAndMaxLengthAndDefaultColor} from "../../utils/get-random-array";
 
 export type TArrayItem = {
     value: number;
     color: ElementStates;
 };
+
+const initialArray = getRandomArrayWithMinAndMaxLengthAndDefaultColor(3, 17, 100);
 export const SortingPage: React.FC = () => {
-    const [arr, setArr] = useState<TArrayItem[]>([]);
+    const [arr, setArr] = useState<TArrayItem[]>(initialArray);
     const [sortName, setSortName] = useState("Выбор");
     const [sortDirection, setSortDirection] = useState<Direction>();
     const [loader, setLoader] = useState(false);
-
-    useEffect(() => {
-        setArr([...getRandomArr()]);
-        return () => {
-            setArr([])
-        };
-    }, []);
 
     const selectRadioBtn = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSortName(event.target.value);
@@ -59,7 +54,7 @@ export const SortingPage: React.FC = () => {
     };
 
     const generateRandomArr = () => {
-        setArr([...getRandomArr()]);
+        setArr([...getRandomArrayWithMinAndMaxLengthAndDefaultColor(3, 17, 100)]);
     };
 
     return (
