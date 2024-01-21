@@ -25,6 +25,7 @@ export const SolutionLayout: React.FC<SolutionLayoutProps> = ({
           им. Фибоначчи
         </span>
       </div>
+
       <div className={styles.contentCard}>
         <Link className={styles.link} to="/">
           <ReturnButton extraClass={styles.returnButton} />

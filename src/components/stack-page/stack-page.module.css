@@ -1,0 +1,37 @@
+.input-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.input {
+    max-width: 377px;
+    width: 100%;
+}
+
+.input input {
+    height: 60px;
+}
+
+.add-btn {
+    width: 121px;
+}
+
+.remove-btn {
+    width: 108px;
+}
+
+.reset-btn {
+    width: 119px;
+    margin-left: 68px;
+}
+
+.solution-list {
+    margin-top: 52px;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 0;
+}
