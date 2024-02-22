@@ -87,6 +87,7 @@ export const QueuePage: React.FC = () => {
                     disabled={!values.inputValue || !queue.hasRoom() || removeBtnLoader || resetBtnLoader}
                     extraClass={styles[`add-btn`]}
                     isLoader={addBtnLoader}
+                    data-testid="submit-btn"
                 />
                 <Button
                     text="Удалить"
@@ -94,6 +95,7 @@ export const QueuePage: React.FC = () => {
                     disabled={queue.isEmpty() || addBtnLoader || resetBtnLoader}
                     extraClass={styles[`remove-btn`]}
                     isLoader={removeBtnLoader}
+                    data-testid="remove-btn"
                 />
                 <Button
                     text="Очистить"
@@ -102,6 +104,7 @@ export const QueuePage: React.FC = () => {
                     disabled={queue.isEmpty() || addBtnLoader || removeBtnLoader}
                     extraClass={styles[`reset-btn`]}
                     isLoader={resetBtnLoader}
+                    data-testid="reset-btn"
                 />
             </div>
             {queueArr && (

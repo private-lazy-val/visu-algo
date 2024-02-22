@@ -45,6 +45,7 @@ export const StringComponent: React.FC = () => {
                     isLoader={loader}
                     disabled={!values.inputValue}
                     extraClass={styles[`submit-btn`]}
+                    data-testid='submit-btn'
                 />
             </div>
 

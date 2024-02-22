@@ -1,0 +1,336 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Circle Component renders as small 1`] = `
+<div
+  className="content "
+>
+  <div
+    className="text text_type_input text_color_input mb-4 
+            absolute 
+            head 
+            element"
+  />
+  <div
+    className="circle small default"
+  >
+    <p
+      className="text text_type_circle text_color_input letter"
+    />
+  </div>
+  <p
+    className="text text_type_input text_color_input mt-4 absolute index"
+  />
+  <div
+    className="text text_type_input text_color_input mt-4 
+            absolute 
+            tail30 
+            element"
+  />
+</div>
+`;
+
+exports[`Circle Component renders in changing state 1`] = `
+<div
+  className="content "
+>
+  <div
+    className="text text_type_input text_color_input mb-4 
+            absolute 
+            head 
+            element"
+  />
+  <div
+    className="circle  changing"
+  >
+    <p
+      className="text text_type_circle text_color_input letter"
+    />
+  </div>
+  <p
+    className="text text_type_input text_color_input mt-4 absolute index"
+  />
+  <div
+    className="text text_type_input text_color_input mt-4 
+            absolute 
+            tail30 
+            element"
+  />
+</div>
+`;
+
+exports[`Circle Component renders in default state 1`] = `
+<div
+  className="content "
+>
+  <div
+    className="text text_type_input text_color_input mb-4 
+            absolute 
+            head 
+            element"
+  />
+  <div
+    className="circle  default"
+  >
+    <p
+      className="text text_type_circle text_color_input letter"
+    />
+  </div>
+  <p
+    className="text text_type_input text_color_input mt-4 absolute index"
+  />
+  <div
+    className="text text_type_input text_color_input mt-4 
+            absolute 
+            tail30 
+            element"
+  />
+</div>
+`;
+
+exports[`Circle Component renders in modified state 1`] = `
+<div
+  className="content "
+>
+  <div
+    className="text text_type_input text_color_input mb-4 
+            absolute 
+            head 
+            element"
+  />
+  <div
+    className="circle  modified"
+  >
+    <p
+      className="text text_type_circle text_color_input letter"
+    />
+  </div>
+  <p
+    className="text text_type_input text_color_input mt-4 absolute index"
+  />
+  <div
+    className="text text_type_input text_color_input mt-4 
+            absolute 
+            tail30 
+            element"
+  />
+</div>
+`;
+
+exports[`Circle Component renders with head 1`] = `
+<div
+  className="content "
+>
+  <div
+    className="text text_type_input text_color_input mb-4 
+            absolute 
+            head 
+            string"
+  >
+    1
+  </div>
+  <div
+    className="circle  default"
+  >
+    <p
+      className="text text_type_circle text_color_input letter"
+    />
+  </div>
+  <p
+    className="text text_type_input text_color_input mt-4 absolute index"
+  />
+  <div
+    className="text text_type_input text_color_input mt-4 
+            absolute 
+            tail30 
+            element"
+  />
+</div>
+`;
+
+exports[`Circle Component renders with index 1`] = `
+<div
+  className="content "
+>
+  <div
+    className="text text_type_input text_color_input mb-4 
+            absolute 
+            head 
+            element"
+  />
+  <div
+    className="circle  default"
+  >
+    <p
+      className="text text_type_circle text_color_input letter"
+    />
+  </div>
+  <p
+    className="text text_type_input text_color_input mt-4 absolute index"
+  >
+    1
+  </p>
+  <div
+    className="text text_type_input text_color_input mt-4 
+            absolute 
+            tail60 
+            element"
+  />
+</div>
+`;
+
+exports[`Circle Component renders with letters 1`] = `
+<div
+  className="content "
+>
+  <div
+    className="text text_type_input text_color_input mb-4 
+            absolute 
+            head 
+            element"
+  />
+  <div
+    className="circle  default"
+  >
+    <p
+      className="text text_type_circle text_color_input letter"
+    >
+      A
+    </p>
+  </div>
+  <p
+    className="text text_type_input text_color_input mt-4 absolute index"
+  />
+  <div
+    className="text text_type_input text_color_input mt-4 
+            absolute 
+            tail30 
+            element"
+  />
+</div>
+`;
+
+exports[`Circle Component renders with react-element in head 1`] = `
+<div
+  className="content "
+>
+  <div
+    className="text text_type_input text_color_input mb-4 
+            absolute 
+            head 
+            element"
+  >
+    <span>
+      React Element
+    </span>
+  </div>
+  <div
+    className="circle  default"
+  >
+    <p
+      className="text text_type_circle text_color_input letter"
+    />
+  </div>
+  <p
+    className="text text_type_input text_color_input mt-4 absolute index"
+  />
+  <div
+    className="text text_type_input text_color_input mt-4 
+            absolute 
+            tail30 
+            element"
+  />
+</div>
+`;
+
+exports[`Circle Component renders with react-element in tail 1`] = `
+<div
+  className="content "
+>
+  <div
+    className="text text_type_input text_color_input mb-4 
+            absolute 
+            head 
+            element"
+  />
+  <div
+    className="circle  default"
+  >
+    <p
+      className="text text_type_circle text_color_input letter"
+    />
+  </div>
+  <p
+    className="text text_type_input text_color_input mt-4 absolute index"
+  />
+  <div
+    className="text text_type_input text_color_input mt-4 
+            absolute 
+            tail30 
+            element"
+  >
+    <span>
+      React Element
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Circle Component renders with tail 1`] = `
+<div
+  className="content "
+>
+  <div
+    className="text text_type_input text_color_input mb-4 
+            absolute 
+            head 
+            element"
+  />
+  <div
+    className="circle  default"
+  >
+    <p
+      className="text text_type_circle text_color_input letter"
+    />
+  </div>
+  <p
+    className="text text_type_input text_color_input mt-4 absolute index"
+  />
+  <div
+    className="text text_type_input text_color_input mt-4 
+            absolute 
+            tail30 
+            string"
+  >
+    1
+  </div>
+</div>
+`;
+
+exports[`Circle Component renders without a letter 1`] = `
+<div
+  className="content "
+>
+  <div
+    className="text text_type_input text_color_input mb-4 
+            absolute 
+            head 
+            element"
+  />
+  <div
+    className="circle  default"
+  >
+    <p
+      className="text text_type_circle text_color_input letter"
+    />
+  </div>
+  <p
+    className="text text_type_input text_color_input mt-4 absolute index"
+  />
+  <div
+    className="text text_type_input text_color_input mt-4 
+            absolute 
+            tail30 
+            element"
+  />
+</div>
+`;

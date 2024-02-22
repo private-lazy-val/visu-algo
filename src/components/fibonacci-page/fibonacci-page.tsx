@@ -47,6 +47,7 @@ export const FibonacciPage: React.FC = () => {
                     isLoader={loader}
                     disabled={!values.inputValue || parseInt(values.inputValue) > 19}
                     extraClass={styles[`submit-btn`]}
+                    data-testid='submit-btn'
                 />
             </div>
             {fibArr.length > 0 && (
