@@ -81,6 +81,7 @@ export const StackPage: React.FC = () => {
                     disabled={!values.inputValue || removeBtnLoader || resetBtnLoader}
                     extraClass={styles[`add-btn`]}
                     isLoader={addBtnLoader}
+                    data-testid="submit-btn"
                 />
                 <Button
                     text="Удалить"
@@ -88,6 +89,7 @@ export const StackPage: React.FC = () => {
                     disabled={!stackArr.length || addBtnLoader || resetBtnLoader}
                     extraClass={styles[`remove-btn`]}
                     isLoader={removeBtnLoader}
+                    data-testid="remove-btn"
                 />
                 <Button
                     text="Очистить"
@@ -96,6 +98,7 @@ export const StackPage: React.FC = () => {
                     disabled={!stackArr.length || addBtnLoader || removeBtnLoader}
                     extraClass={styles[`reset-btn`]}
                     isLoader={resetBtnLoader}
+                    data-testid="reset-btn"
                 />
             </div>
             {stackArr.length > 0 && (

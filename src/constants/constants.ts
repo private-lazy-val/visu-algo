@@ -1,0 +1,21 @@
+export const appUrl = 'http://localhost:3001';
+
+export const testInputValueSelector = 'input[name=inputValue]';
+export const testInputIndexSelector = 'input[name=inputIndex]';
+export const testSubmitButtonSelector = '[data-testid=submit-btn]';
+export const testDeleteButtonSelector = '[data-testid=remove-btn]';
+export const testResetButtonSelector = '[data-testid=reset-btn]';
+export const testAddToHeadButtonSelector = '[data-testid=add-to-head-btn]';
+export const testAddToTailButtonSelector = '[data-testid=add-to-tail-btn]';
+export const testRemoveFromHeadButtonSelector = '[data-testid=remove-from-head-btn]';
+export const testRemoveFromTailButtonSelector = '[data-testid=remove-from-tail-btn]';
+export const testAddByIndexButtonSelector = '[data-testid=add-by-index-btn]';
+export const testRemoveByIndexButtonSelector = '[data-testid=remove-by-index-btn]';
+export const testCircleSelector = '[data-testid=circle]';
+export const testHeadCircleSelector = '[data-testid=head]';
+export const testTailCircleSelector = '[data-testid=tail]';
+export const testIndexSelector = '[data-testid=index]';
+export const testArrowSelector = '[data-testid=arrow]';
+export const testTopCircleSelector = '[data-testid=top-circle]';
+export const testBottomCircleSelector = '[data-testid=bottom-circle]';
+export const testSmallCircleSelector = '[class*=small]';
